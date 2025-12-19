@@ -1,10 +1,1376 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>My Website</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anushka - Personal Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      color: #1a1a1a;
+      background: #ffffff;
+      min-height: 100vh;
+    }
+
+    /* Navigation */
+    nav {
+      background: #ffffff;
+      padding: 1.5rem 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #1a1a1a;
+      font-weight: 400;
+      transition: color 0.3s;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+    }
+
+    nav a:hover {
+      color: #666;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #1a1a1a;
+      padding-top: 80px;
+      position: relative;
+      overflow: hidden;
+      background: #000000;
+    }
+
+    /* Particle Canvas */
+    #particles {
+      display: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-content h1 {
+      font-size: 5.5rem;
+      margin-bottom: 1.5rem;
+      animation: fadeInUp 1s ease;
+      font-weight: 700;
+      letter-spacing: -2px;
+      color: #ffffff;
+      text-transform: capitalize;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    .hero-divider {
+      width: 80px;
+      height: 1px;
+      background: #ffffff;
+      margin: 0 auto 1.5rem;
+      opacity: 0.5;
+    }
+
+    .hero-content h2 {
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      animation: fadeInUp 1s ease 0.2s;
+      animation-fill-mode: backwards;
+      color: #ccc;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    .hero-content p {
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto 2.5rem;
+      animation: fadeInUp 1s ease 0.4s;
+      animation-fill-mode: backwards;
+      line-height: 1.8;
+      color: #ccc;
+      font-weight: 300;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeInUp 1s ease 0.6s;
+      animation-fill-mode: backwards;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 18px 50px;
+      background: #ffffff;
+      color: #000000;
+      text-decoration: none;
+      border: 2px solid #ffffff;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      border-radius: 50px;
+    }
+
+    .btn:hover {
+      background: transparent;
+      color: #ffffff;
+      transform: scale(1.05);
+    }
+
+    /* Scroll Indicator */
+    .scroll-indicator {
+      display: none;
+    }
+
+    /* Section Styles */
+    section {
+      padding: 100px 0;
+      background: white;
+    }
+
+    section h2 {
+      text-align: center;
+      font-size: 3rem;
+      margin-bottom: 4rem;
+      color: #1a1a1a;
+      position: relative;
+      padding-bottom: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -1px;
+      text-transform: capitalize;
+    }
+
+    section h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 1px;
+      background: #1a1a1a;
+    }
+
+    /* About Section */
+    #about {
+      background: #ffffff;
+      color: #1a1a1a;
+      padding: 120px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #about::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(135deg, transparent 0%, rgba(0,0,0,0.02) 100%);
+      pointer-events: none;
+    }
+
+    #about h2 {
+      color: #1a1a1a;
+    }
+
+    #about h2::after {
+      background: #1a1a1a;
+    }
+
+    .about-content {
+      display: flex;
+      align-items: center;
+      gap: 5rem;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .about-image {
+      flex: 1;
+      min-width: 350px;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .about-image::before {
+      content: '';
+      position: absolute;
+      width: 380px;
+      height: 380px;
+      border: 2px solid rgba(0, 0, 0, 0.1);
+      border-radius: 50%;
+      animation: rotate 20s linear infinite;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .about-image img {
+      width: 350px;
+      height: 350px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid #000000;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
+      transition: all 0.4s ease;
+      position: relative;
+      z-index: 2;
+    }
+
+    .about-image img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.35);
+    }
+
+    .about-text {
+      flex: 1.5;
+      min-width: 400px;
+    }
+
+    .about-text h3 {
+      font-size: 3rem;
+      margin-bottom: 2rem;
+      color: #1a1a1a;
+      font-weight: 700;
+      letter-spacing: -1px;
+      line-height: 1.2;
+    }
+
+    .about-text p {
+      font-size: 1.15rem;
+      color: #333;
+      margin-bottom: 1.8rem;
+      line-height: 2;
+      font-weight: 400;
+    }
+
+    .about-text p:last-child {
+      color: #666;
+      font-style: italic;
+    }
+
+    /* Skills Section */
+    #skills {
+      background: #ffffff;
+      color: #1a1a1a;
+    }
+
+    #skills h2 {
+      color: #1a1a1a;
+    }
+
+    #skills h2::after {
+      background: #1a1a1a;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .skill-card {
+      background: #ffffff;
+      padding: 3rem 2.5rem;
+      border: 2px solid #f0f0f0;
+      border-radius: 16px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      text-align: center;
+    }
+
+    .skill-card:hover {
+      border-color: #000000;
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+      background: #ffffff;
+    }
+
+    .skill-card h3 {
+      color: #1a1a1a;
+      margin-bottom: 1.2rem;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .skill-card p {
+      color: #666;
+    }
+
+    /* Projects Section */
+    #projects {
+      background: #000000;
+      color: #ffffff;
+    }
+
+    #projects h2 {
+      color: #ffffff;
+    }
+
+    #projects h2::after {
+      background: #ffffff;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .project-card {
+      background: rgba(255, 255, 255, 0.05);
+      overflow: hidden;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .project-card:hover {
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-10px);
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.5);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .project-image {
+      width: 100%;
+      height: 240px;
+      background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 3.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-image::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+      transform: translateX(-100%);
+      transition: transform 0.6s;
+    }
+
+    .project-card:hover .project-image::after {
+      transform: translateX(100%);
+    }
+
+    .project-content {
+      padding: 1.5rem;
+    }
+
+    .project-content {
+      padding: 2rem;
+    }
+
+    .project-content h3 {
+      color: #ffffff;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      font-size: 1.6rem;
+    }
+
+    .project-content p {
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    .project-link {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: gap 0.3s ease;
+      border-bottom: 1px solid transparent;
+    }
+
+    .project-link:hover {
+      gap: 12px;
+      border-bottom-color: #ffffff;
+    }
+
+    .project-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Contact Section */
+    #contact {
+      background: #000000;
+      color: #ffffff;
+    }
+
+    #contact h2 {
+      color: #ffffff;
+    }
+
+    #contact h2::after {
+      background: #ffffff;
+    }
+
+    .contact-content {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact-content > p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #999;
+      font-weight: 300;
+      margin-bottom: 3rem;
+    }
+
+    .contact-info {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .contact-item span {
+      font-size: 1.5rem;
+    }
+
+    .contact-item a {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 300;
+      font-size: 1rem;
+      transition: color 0.3s;
+      letter-spacing: 1px;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 2px;
+    }
+
+    .contact-item a:hover {
+      color: #999;
+      border-bottom-color: #999;
+    }
+
+    /* Footer */
+    footer {
+      background: #000000;
+      color: #999;
+      text-align: center;
+      padding: 2rem 0;
+      border-top: 1px solid #333;
+      font-weight: 300;
+      letter-spacing: 1px;
+      font-size: 0.9rem;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Journey Section */
+    #journey {
+      background: #000000;
+      color: #ffffff;
+    }
+
+    #journey h2 {
+      color: #ffffff;
+    }
+
+    #journey h2::after {
+      background: #ffffff;
+    }
+
+    .timeline {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .timeline-item {
+      margin-bottom: 3rem;
+      padding-left: 3rem;
+      position: relative;
+      border-left: 2px solid #333;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 0;
+      width: 10px;
+      height: 10px;
+      background: #ffffff;
+      border-radius: 50%;
+      border: 2px solid #000000;
+      box-shadow: 0 0 0 2px #ffffff;
+    }
+
+    .timeline-year {
+      font-size: 0.9rem;
+      color: #999;
+      letter-spacing: 2px;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .timeline-title {
+      font-size: 1.6rem;
+      color: #ffffff;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+      letter-spacing: 0px;
+    }
+
+    .timeline-description {
+      font-size: 1.05rem;
+      color: #ccc;
+      line-height: 1.8;
+      font-weight: 400;
+    }
+
+    /* Hobbies & Interests Section */
+    #hobbies {
+      background: #ffffff;
+      color: #1a1a1a;
+      padding: 100px 0;
+    }
+
+    #hobbies h2 {
+      color: #1a1a1a;
+    }
+
+    #hobbies h2::after {
+      background: #1a1a1a;
+    }
+
+    .hobbies-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .hobby-item {
+      text-align: left;
+      padding: 3rem 2.5rem;
+      background: #ffffff;
+      border-radius: 24px;
+      border: 2px solid #f0f0f0;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hobby-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #000000, transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+
+    .hobby-item:hover {
+      background: #ffffff;
+      transform: translateY(-8px) scale(1.02);
+      border-color: #000000;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+      z-index: 10;
+    }
+
+    .hobby-item:hover::before {
+      transform: translateX(0);
+    }
+
+    .hobby-icon {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      display: inline-block;
+      transform: translateY(0);
+      transition: transform 0.4s ease;
+    }
+
+    .hobby-item:hover .hobby-icon {
+      transform: translateY(-5px) scale(1.1);
+    }
+
+    .hobby-name {
+      font-size: 1.3rem;
+      color: #1a1a1a;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.5rem;
+    }
+
+    .hobby-description {
+      font-size: 0.95rem;
+      color: #666;
+      line-height: 1.6;
+      font-weight: 300;
+      margin-bottom: 1rem;
+    }
+
+    .hobby-details {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: all 0.4s ease;
+      margin-top: 0;
+    }
+
+    .hobby-item:hover .hobby-details {
+      max-height: 300px;
+      opacity: 1;
+      margin-top: 1rem;
+    }
+
+    .hobby-detail-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+      margin-bottom: 0.8rem;
+      padding-left: 0.5rem;
+      border-left: 2px solid #000000;
+    }
+
+    .hobby-detail-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .hobby-detail-bullet {
+      font-size: 0.8rem;
+      color: #000000;
+      font-weight: 600;
+      min-width: 20px;
+    }
+
+    .hobby-detail-text {
+      font-size: 0.85rem;
+      color: #555;
+      line-height: 1.5;
+      font-weight: 400;
+    }
+
+    /* Music Section */
+    #music {
+      background: #000000;
+      color: #ffffff;
+    }
+
+    #music h2 {
+      color: #ffffff;
+    }
+
+    #music h2::after {
+      background: #ffffff;
+    }
+
+    .music-list {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .music-item {
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid #333;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      transition: all 0.3s;
+    }
+
+    .music-item:hover {
+      padding-left: 2.5rem;
+    }
+
+    .music-number {
+      font-size: 1rem;
+      color: #666;
+      min-width: 30px;
+      font-weight: 300;
+    }
+
+    .music-details {
+      flex: 1;
+    }
+
+    .music-title {
+      font-size: 1.2rem;
+      color: #ffffff;
+      margin-bottom: 0.3rem;
+      font-weight: 300;
+      letter-spacing: 1px;
+    }
+
+    .music-artist {
+      font-size: 0.95rem;
+      color: #999;
+      font-weight: 300;
+    }
+
+    /* CV Section */
+    #cv {
+      background: #ffffff;
+      color: #1a1a1a;
+    }
+
+    #cv h2 {
+      color: #1a1a1a;
+    }
+
+    #cv h2::after {
+      background: #1a1a1a;
+    }
+
+    .cv-content {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .cv-description {
+      font-size: 1.1rem;
+      color: #666;
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+    }
+
+    .cv-button {
+      display: inline-block;
+      padding: 20px 60px;
+      background: #000000;
+      color: #ffffff;
+      text-decoration: none;
+      border: 2px solid #000000;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+    }
+
+    .cv-button:hover {
+      background: transparent;
+      color: #000000;
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .cv-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .cv-link {
+      color: #999;
+      text-decoration: none;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 2px;
+      transition: all 0.3s;
+      font-weight: 300;
+    }
+
+    .cv-link:hover {
+      color: #000000;
+      border-bottom-color: #000000;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero-content h2 {
+        font-size: 1.3rem;
+      }
+
+      nav ul {
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      section h2 {
+        font-size: 2rem;
+      }
+
+      .about-content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .btn-group {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn {
+        width: 80%;
+      }
+
+      .timeline-item {
+        padding-left: 2rem;
+      }
+
+      .hobbies-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      }
+    }
+  </style>
+
 </head>
 <body>
-  <h1>Hello, I’m Anushka</h1>
-  <p>Welcome to my personal website.</p>
+  <!-- Navigation -->
+  <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#journey">Journey</a></li>
+      <li><a href="#hobbies">Hobbies</a></li>
+      <li><a href="#music">Music</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#cv">CV</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <div class="hero" id="home">
+    <canvas id="particles"></canvas>
+    <div class="hero-content">
+      <h1><span id="typing-text"></span></h1>
+      <div class="hero-divider"></div>
+      <h2>Developer • Designer • Innovator</h2>
+      <p>Bold ideas. Intelligent solutions. Elegant execution.</p>
+      <a href="#contact" class="btn">Let's Connect</a>
+    </div>
+  </div>
+
+  <!-- About Section -->
+  <section id="about">
+    <div class="container">
+      <h2>About Me</h2>
+      <div class="about-content">
+        <div class="about-image">
+          <img src="image .png" alt="Anushka">
+        </div>
+        <div class="about-text">
+          <h3>Bold. Confident. Creative.</h3>
+          <p>I'm Anushka—a passionate developer who believes in the power of intelligent design and fearless innovation. With a sharp mind and a caring approach, I create digital experiences that not only look stunning but solve real problems.</p>
+          <p>My strength lies in combining technical expertise with creative vision. I'm confident in my abilities, always learning, always growing, and never afraid to push boundaries to achieve excellence.</p>
+          <p>Whether it's building elegant websites or crafting innovative solutions, I bring intelligence, care, and bold thinking to everything I create.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Journey Section -->
+  <section id="journey">
+    <div class="container">
+      <h2>My Journey</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-year">2025</div>
+          <div class="timeline-title">Present</div>
+          <div class="timeline-description">Currently pursuing my passion in web development and design, building modern and elegant digital experiences.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2024</div>
+          <div class="timeline-title">Started Web Development</div>
+          <div class="timeline-description">Began my journey into the world of coding, learning HTML, CSS, JavaScript, and modern frameworks.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2023</div>
+          <div class="timeline-title">Discovered My Interest</div>
+          <div class="timeline-description">Found my passion for technology and design, leading me to explore the creative possibilities of web development.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">Earlier</div>
+          <div class="timeline-title">The Beginning</div>
+          <div class="timeline-description">My journey began with curiosity about how beautiful websites are created and a desire to bring ideas to life.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hobbies & Interests Section -->
+  <section id="hobbies">
+    <div class="container">
+      <h2>What Drives Me</h2>
+      <div class="hobbies-grid">
+        <div class="hobby-item">
+          <div class="hobby-icon">💻</div>
+          <div class="hobby-name">Problem Solving</div>
+          <div class="hobby-description">Tackling complex challenges with intelligent solutions and innovative thinking</div>
+          <div class="hobby-details">
+            <div class="hobby-detail-item">
+              <span class="hobby-detail-bullet">→</span>
+              <span class="hobby-detail-text">Breaking down complex problems into manageable solutions</span>
+            </div>
+            <div class="hobby-detail-item">
+              <span class="hobby-detail-bullet">→</span>
+              <span class="hobby-detail-text">Developing algorithms and optimizing code performance</span>
+            </div>
+            <div class="hobby-detail-item">
+              <span class="hobby-detail-bullet">→</span>
+              <span class="hobby-detail-text">Debugging with analytical thinking and persistence</span>
+            </div>
+          </div>
+        </div>
+        <div class="hobby-item">
+          <div class="hobby-icon">🎨</div>
+          <div class="hobby-name">Creative Design</div>
+          <div class="hobby-description">Crafting beautiful interfaces that merge aesthetics with functionality</div>
+          <div class="hobby-details">
+            <div class="hobby-detail-item">
+              <span class="hobby-detail-bullet">→</span>
+              <span class="hobby-detail-text">Designing intuitive user experiences with attention to detail</span>
+            </div>
+            <div class="hobby-detail-item">
+              <span class="hobby-detail-bullet">→</span>
+              <span class="hobby-detail-text">Creating visual hierarchies and color harmonies</span>
+            </div>
+            <div class="hobby-detail-item">
+              <span class="hobby-detail-bullet">→</span>
+              <span class="hobby-detail-text">Experimenting with modern design trends and animations</span>
+            </div>
+          </div>
+        </div>
+        <div class="hobby-item">
+          <div class="hobby-icon">📚</div>
+          <div class="hobby-name">Continuous Learning</div>
+          <div class="hobby-description">Expanding knowledge through books, courses, and staying ahead of trends</div>
+          <div class="hobby-details">
+            <div class="hobby-detail-item">
+              <span class="hobby-detail-bullet">→</span>
+              <span class="hobby-detail-text">Reading tech blogs, documentation, and industry insights</span>
+            </div>
+            <div class="hobby-detail-item">
+              <span class="hobby-detail-bullet">→</span>
+              <span class="hobby-detail-text">Taking online courses in new technologies and frameworks</span>
+            </div>
+            <div class="hobby-detail-item">
+              <span class="hobby-detail-bullet">→</span>
+              <span class="hobby-detail-text">Attending workshops and staying updated with innovations</span>
+            </div>
+          </div>
+        </div>
+        <div class="hobby-item">
+          <div class="hobby-icon">🎵</div>
+          <div class="hobby-name">Music & Arts</div>
+          <div class="hobby-description">Finding inspiration and balance through creative expression and melodies</div>
+          <div class="hobby-details">
+            <div class="hobby-detail-item">
+              <span class="hobby-detail-bullet">→</span>
+              <span class="hobby-detail-text">Exploring diverse genres and discovering new artists</span>
+            </div>
+            <div class="hobby-detail-item">
+              <span class="hobby-detail-bullet">→</span>
+              <span class="hobby-detail-text">Using music as a creative catalyst during work sessions</span>
+            </div>
+            <div class="hobby-detail-item">
+              <span class="hobby-detail-bullet">→</span>
+              <span class="hobby-detail-text">Appreciating artistic expression in all its forms</span>
+            </div>
+          </div>
+        </div>
+        <div class="hobby-item">
+          <div class="hobby-icon">✈️</div>
+          <div class="hobby-name">Exploration</div>
+          <div class="hobby-description">Discovering new cultures, perspectives, and experiences around the world</div>
+          <div class="hobby-details">
+            <div class="hobby-detail-item">
+              <span class="hobby-detail-bullet">→</span>
+              <span class="hobby-detail-text">Traveling to new destinations and immersing in local cultures</span>
+            </div>
+            <div class="hobby-detail-item">
+              <span class="hobby-detail-bullet">→</span>
+              <span class="hobby-detail-text">Learning from diverse perspectives and global experiences</span>
+            </div>
+            <div class="hobby-detail-item">
+              <span class="hobby-detail-bullet">→</span>
+              <span class="hobby-detail-text">Building connections across cultures and communities</span>
+            </div>
+          </div>
+        </div>
+        <div class="hobby-item">
+          <div class="hobby-icon">📷</div>
+          <div class="hobby-name">Visual Storytelling</div>
+          <div class="hobby-description">Capturing moments and stories through the lens of creativity</div>
+          <div class="hobby-details">
+            <div class="hobby-detail-item">
+              <span class="hobby-detail-bullet">→</span>
+              <span class="hobby-detail-text">Photography as a way to document life and moments</span>
+            </div>
+            <div class="hobby-detail-item">
+              <span class="hobby-detail-bullet">→</span>
+              <span class="hobby-detail-text">Finding beauty in everyday scenes and details</span>
+            </div>
+            <div class="hobby-detail-item">
+              <span class="hobby-detail-bullet">→</span>
+              <span class="hobby-detail-text">Crafting visual narratives that evoke emotion</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Music Section -->
+  <section id="music">
+    <div class="container">
+      <h2>Songs I Love</h2>
+      <div class="music-list">
+        <div class="music-item">
+          <div class="music-number">01</div>
+          <div class="music-details">
+            <div class="music-title">Song Title One</div>
+            <div class="music-artist">Artist Name</div>
+          </div>
+        </div>
+        <div class="music-item">
+          <div class="music-number">02</div>
+          <div class="music-details">
+            <div class="music-title">Song Title Two</div>
+            <div class="music-artist">Artist Name</div>
+          </div>
+        </div>
+        <div class="music-item">
+          <div class="music-number">03</div>
+          <div class="music-details">
+            <div class="music-title">Song Title Three</div>
+            <div class="music-artist">Artist Name</div>
+          </div>
+        </div>
+        <div class="music-item">
+          <div class="music-number">04</div>
+          <div class="music-details">
+            <div class="music-title">Song Title Four</div>
+            <div class="music-artist">Artist Name</div>
+          </div>
+        </div>
+        <div class="music-item">
+          <div class="music-number">05</div>
+          <div class="music-details">
+            <div class="music-title">Song Title Five</div>
+            <div class="music-artist">Artist Name</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills">
+    <div class="container">
+      <h2>My Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h3>Frontend Development</h3>
+          <p>HTML, CSS, JavaScript, React, Vue.js, Responsive Design</p>
+        </div>
+        <div class="skill-card">
+          <h3>Backend Development</h3>
+          <p>Node.js, Python, PHP, Database Management, API Development</p>
+        </div>
+        <div class="skill-card">
+          <h3>Design</h3>
+          <p>UI/UX Design, Figma, Adobe XD, Wireframing, Prototyping</p>
+        </div>
+        <div class="skill-card">
+          <h3>Tools & Others</h3>
+          <p>Git, GitHub, VS Code, Agile Methodology, Problem Solving</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects">
+    <div class="container">
+      <h2>My Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-image">🌐</div>
+          <div class="project-content">
+            <h3>Project One</h3>
+            <p>A responsive web application built with modern technologies. Features include user authentication, real-time updates, and a clean interface.</p>
+            <a href="#" class="project-link">View Project →</a>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-image">💼</div>
+          <div class="project-content">
+            <h3>Project Two</h3>
+            <p>An e-commerce platform with seamless shopping experience, secure payment integration, and inventory management.</p>
+            <a href="#" class="project-link">View Project →</a>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-image">📱</div>
+          <div class="project-content">
+            <h3>Project Three</h3>
+            <p>A mobile-first web app focused on user experience with intuitive navigation and beautiful animations.</p>
+            <a href="#" class="project-link">View Project →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CV Section -->
+  <section id="cv">
+    <div class="container">
+      <h2>My Resume</h2>
+      <div class="cv-content">
+        <p class="cv-description">Download my curriculum vitae to learn more about my experience, education, and skills. Feel free to reach out if you'd like to discuss potential opportunities.</p>
+        <a href="#" class="cv-button" download>Download CV</a>
+        <div class="cv-links">
+          <a href="#" class="cv-link">View Online</a>
+          <a href="#skills" class="cv-link">View Skills</a>
+          <a href="#projects" class="cv-link">View Projects</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="container">
+      <h2>Get In Touch</h2>
+      <div class="contact-content">
+        <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.</p>
+        <div class="contact-info">
+          <div class="contact-item">
+            <span>📧</span>
+            <a href="mailto:your.email@example.com">your.email@example.com</a>
+          </div>
+          <div class="contact-item">
+            <span>💼</span>
+            <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
+          </div>
+          <div class="contact-item">
+            <span>💻</span>
+            <a href="https://github.com/RimAnu204" target="_blank">GitHub</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Anushka. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Typing Effect for "hi i m anushka"
+    document.addEventListener('DOMContentLoaded', function() {
+      const text = 'Hi ! I am Anushka';
+      const typingElement = document.getElementById('typing-text');
+      let charIndex = 0;
+      const typingSpeed = 150; // milliseconds per character
+
+      function type() {
+        if (charIndex < text.length) {
+          typingElement.textContent += text.charAt(charIndex);
+          charIndex++;
+          setTimeout(type, typingSpeed);
+        } else {
+          // Add blinking cursor after typing is complete
+          typingElement.style.borderRight = '3px solid white';
+          typingElement.style.paddingRight = '5px';
+          setInterval(() => {
+            typingElement.style.borderRight = 
+              typingElement.style.borderRight === '3px solid white' ? 
+              '3px solid transparent' : '3px solid white';
+          }, 500);
+        }
+      }
+
+      type();
+
+      // Particle Animation
+      const canvas = document.getElementById('particles');
+      if (canvas) {
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particles = [];
+        const particleCount = 100;
+
+        class Particle {
+          constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.vx = (Math.random() - 0.5) * 0.5;
+            this.vy = (Math.random() - 0.5) * 0.5;
+            this.radius = Math.random() * 2 + 1;
+          }
+
+          update() {
+            this.x += this.vx;
+            this.y += this.vy;
+
+            if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+            if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+          }
+
+          draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+            ctx.fill();
+          }
+        }
+
+        for (let i = 0; i < particleCount; i++) {
+          particles.push(new Particle());
+        }
+
+        function connectParticles() {
+          for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+              const dx = particles[i].x - particles[j].x;
+              const dy = particles[i].y - particles[j].y;
+              const distance = Math.sqrt(dx * dx + dy * dy);
+
+              if (distance < 100) {
+                ctx.beginPath();
+                ctx.moveTo(particles[i].x, particles[i].y);
+                ctx.lineTo(particles[j].x, particles[j].y);
+                ctx.strokeStyle = `rgba(255, 255, 255, ${0.2 - distance / 500})`;
+                ctx.lineWidth = 1;
+                ctx.stroke();
+              }
+            }
+          }
+        }
+
+        function animate() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          
+          particles.forEach(particle => {
+            particle.update();
+            particle.draw();
+          });
+
+          connectParticles();
+          requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        window.addEventListener('resize', () => {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+        });
+      }
+
+      // Smooth scrolling
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
